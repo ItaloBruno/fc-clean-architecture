@@ -3,7 +3,6 @@ import UpdateProductUseCase from "./update.product.usecase";
 import {Sequelize} from "sequelize-typescript";
 import ProductModel from "../../../infrastructure/product/repository/sequelize/product.model";
 import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
-import Product from "../../../domain/product/entity/product";
 
 const product = ProductFactory.create(
     "a",
@@ -41,7 +40,7 @@ describe("Integration test for product update use case", () => {
     it("should update a product", async () => {
         const productRepository = new ProductRepository();
         const productUpdateUseCase = new UpdateProductUseCase(productRepository);
-        productRepository.create(product as Product);
+        productRepository.create(product);
 
         const output = await productUpdateUseCase.execute(input);
         expect(output).toEqual({
